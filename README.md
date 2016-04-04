@@ -22,4 +22,4 @@ This project uses Scala and :
 * [Scalatest](http://www.scalatest.org) for writing assertions.
 * [SBT](http://www.scala-sbt.org/) as a build tool.
 
-Let's have a look at the slides first. 
+Let's have a look at the [slides first](https://speakerdeck.com/xbucchiotty/fp-in-scala-106-set-category).
