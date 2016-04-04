@@ -10,6 +10,7 @@ object example2 {
 
 	implicit object FileMonoid extends Monoid[File] {
 
+		// SEEME 2_Monoid_1
 		override def combine(x: File, y: File): File = {
 			if (x.isDirectory) {
 				if (y.isDirectory) {
@@ -42,6 +43,7 @@ object example2 {
 
 		}
 
+		// SEEME 2_Monoid_2
 		lazy val empty: File = Files.createTempDirectory("exo3_4").toFile
 	}
 
@@ -67,7 +69,8 @@ class MonoidSpec extends FunSpec with ShouldMatchers {
 			val file3 = Files.createTempFile("exo3-4", ".3")
 			Files.write(file3, Array(3.toByte))
 
-			val mergedFile = file1.toFile combine file2.toFile
+			// SEEME 2_Monoid_3
+			val mergedFile: File = ???
 
 			Files.readAllBytes(mergedFile.toPath) shouldBe Array(1.toByte, 2.toByte)
 		}
@@ -84,11 +87,10 @@ class MonoidSpec extends FunSpec with ShouldMatchers {
 
 			val files = List(file1, file2, file3).map(_.toFile)
 
-			val mergedFileFromLeft = Foldable[List].foldLeft(files, FileMonoid.empty)(FileMonoid.combine)
+			// // SEEME 2_Monoid_4
+			val mergedFileFromLeft: File = ???
 
-			val mergedFileFromRight = Foldable[List].foldRight(files, Eval.now(FileMonoid.empty)) {
-				case (file, lazyAcc) => lazyAcc.map(file |+| _)
-			}.value
+			val mergedFileFromRight: File = ???
 
 
 			Files.readAllBytes(mergedFileFromLeft.toPath) shouldBe Array(1.toByte, 2.toByte, 3.toByte)
@@ -110,7 +112,8 @@ class MonoidSpec extends FunSpec with ShouldMatchers {
 
 			val files = List(file1, file2, file3).map(_.toFile)
 
-			val mergedFile = Foldable[List].fold(files)
+			// SEEME 2_Monoid_5
+			val mergedFile: File = ???
 
 			Files.readAllBytes(mergedFile.toPath) shouldBe Array(1.toByte, 2.toByte, 3.toByte)
 
@@ -118,7 +121,8 @@ class MonoidSpec extends FunSpec with ShouldMatchers {
 		}
 
 		it("can reduce an empty list of file") {
-			val emptyFold = Foldable[List].fold(List.empty[File])
+			// SEEME 2_Monoid_6
+			val emptyFold: File = ???
 
 			emptyFold shouldBe a('directory)
 		}

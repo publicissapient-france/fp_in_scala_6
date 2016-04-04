@@ -11,6 +11,7 @@ object example1 {
 
 	implicit object FileSemiGroup extends Semigroup[File] {
 
+		// SEEME 1_Semigroup_1
 		override def combine(x: File, y: File): File = {
 			val destination = Files.createTempFile(x.getName, ".merged")
 
@@ -52,23 +53,21 @@ class SemiGroupSpec extends FunSpec with ShouldMatchers {
 
 		it("should merge two files to a new temporary file") {
 
-			val mergedFile = file1.toFile.combine(file2.toFile)
-			info(mergedFile.toString)
+			// SEEME 1_Semigroup_2
+			val mergedFile: File = ???
 
 			Files.readAllBytes(mergedFile.toPath) shouldBe Array(1.toByte, 2.toByte)
-			Files.readAllBytes((file1.toFile |+| file2.toFile).toPath) shouldBe Array(1.toByte, 2.toByte)
-			
+
 		}
 
 		it("should be equivalent to merge multiple files from left or right") {
 
 			val files = List(file1, file2, file3).map(_.toFile)
 
-			val mergedFileFromLeft = files.reduceLeft(FileSemiGroup.combine)
-			info(mergedFileFromLeft.toString)
+			// SEEME 1_Semigroup_3
+			val mergedFileFromLeft: File = ???
 
-			val mergedFileFromRight = files.reduceRight(FileSemiGroup.combine)
-			info(mergedFileFromRight.toString)
+			val mergedFileFromRight: File = ???
 
 			Files.readAllBytes(mergedFileFromLeft.toPath) shouldBe Array(1.toByte, 2.toByte, 3.toByte)
 			Files.readAllBytes(mergedFileFromLeft.toPath) shouldBe Files.readAllBytes(mergedFileFromRight.toPath)
@@ -77,15 +76,16 @@ class SemiGroupSpec extends FunSpec with ShouldMatchers {
 		it("should reduce a non empty list of files") {
 			val files = List(file1, file2, file3).map(_.toFile)
 
-			val mergedFile = Reducible[List].reduce(files)
-			info(mergedFile.toString)
+			// SEEME 1_Semigroup_4
+			val mergedFile: File = ???
 
 			Files.readAllBytes(mergedFile.toPath) shouldBe Array(1.toByte, 2.toByte, 3.toByte)
 		}
 
 		it("does not reduce an empty list of file") {
 			a[NoSuchElementException] shouldBe thrownBy {
-				Reducible[List].reduce(List.empty)
+				// SEEME 1_Semigroup_5
+				???
 			}
 		}
 	}

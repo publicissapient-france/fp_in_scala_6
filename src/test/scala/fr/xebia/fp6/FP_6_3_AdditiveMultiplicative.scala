@@ -10,7 +10,8 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 
 	describe("The boolean additive monoid") {
 
-		implicit val monoid: Monoid[Boolean] = Monoid.additive[Boolean]
+		// SEEME 3_Additive_1
+		implicit val monoid: Monoid[Boolean] = ???
 
 		it("should fold an empty list of boolean to false") {
 
@@ -33,7 +34,8 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 
 	describe("The boolean multiplicative monoid") {
 
-		implicit val monoid: Monoid[Boolean] = Monoid.multiplicative[Boolean]
+		// SEEME 3_Additive_2
+		implicit val monoid: Monoid[Boolean] = ???
 
 		it("should fold an empty list of boolean to true") {
 
@@ -59,15 +61,19 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 
 		import cats.std.int.intGroup
 
+		// SEEME 3_Additive_3
 		class GenericCounter[T: Monoid] {
 
 			import cats.syntax.semigroup._
 
+			// SEEME 3_Additive_4
 			private lazy val M = implicitly[Monoid[T]]
 
-			//Mutable for presentation mode ;-) 
+			//Mutable for presentation mode ;-)
+			// SEEME 3_Additive_5
 			private var counter: T = M.empty
 
+			// SEEME 3_Additive_6
 			def incrementedWith(newValue: T): Unit = {
 				this.counter = counter |+| newValue
 			}
@@ -90,7 +96,7 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 		import cats.std.int._
 
 		it("should start with empty value from the monoid") {
-
+			// SEEME 3_Additive_7
 			new GenericCounter[Int].current shouldBe 0
 
 			new GenericCounter[Boolean]()(Monoid.additive).current shouldBe false
@@ -100,6 +106,7 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 
 		describe("for additive result monoid") {
 
+			// SEEME 3_Additive_8
 			implicit val additiveHttpResult = new AdditiveMonoid[HttpResult] {
 
 				override def zero: HttpResult = `500 Internal Server Error`
@@ -114,14 +121,14 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 			implicit val monoid: Monoid[HttpResult] = Monoid.additive[HttpResult]
 
 			it("should start with `500 Internal Server Error`") {
-
+				// SEEME 3_Additive_8
 				new GenericCounter[HttpResult].current shouldBe `500 Internal Server Error`
 
 
 			}
 
 			it("be `500 Internal Server Error` when only `500 Internal Server Error` values are added") {
-
+				// SEEME 3_Additive_9
 				val counter = new GenericCounter[HttpResult]
 
 				counter incrementedWith `500 Internal Server Error`
@@ -132,7 +139,7 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 			}
 
 			it("be `200 OK` when with at least one `200 OK` value") {
-
+				// SEEME 3_Additive_10
 				val counter = new GenericCounter[HttpResult]
 
 				counter incrementedWith `500 Internal Server Error`
@@ -146,6 +153,7 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 
 		describe("for multiplicative result monoid") {
 
+			// SEEME 3_Additive_11
 			implicit val multiplicativeHttpResult = new MultiplicativeMonoid[HttpResult] {
 
 				override def one: HttpResult = `200 OK`
@@ -160,6 +168,7 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 
 			it("should start with `200 OK`") {
 
+				// SEEME 3_Additive_12
 				new GenericCounter[HttpResult].current shouldBe `200 OK`
 
 
@@ -167,6 +176,7 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 
 			it("be `500 Internal Server Error` when at least one `500 Internal Server Error` is added") {
 
+				// SEEME 3_Additive_13
 				val counter = new GenericCounter[HttpResult]
 
 				counter incrementedWith `200 OK`
@@ -179,6 +189,7 @@ class FP_6_3_AdditiveMultiplicative extends FunSpec with ShouldMatchers {
 
 			it("be `200 OK` when only `200 OK` values are added") {
 
+				// SEEME 3_Additive_14
 				val counter = new GenericCounter[HttpResult]
 
 				counter incrementedWith `200 OK`

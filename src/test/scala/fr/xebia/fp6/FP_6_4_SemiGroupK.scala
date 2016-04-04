@@ -7,17 +7,19 @@ class FP_6_4_SemiGroupK extends FunSpec with ShouldMatchers {
 
 	object example4 {
 
+		// SEEME 4_SemigroupK_1
 		implicit object SetMultiplicativeSemigroup extends SemigroupK[Set] {
 
-			override def combine[A](x: Set[A], y: Set[A]): Set[A] = x intersect y
+			override def combine[A](x: Set[A], y: Set[A]): Set[A] = ???
 
 		}
 
+		// SEEME 4_SemigroupK_2
 		implicit object SetAdditiveMonoid extends MonoidK[Set] {
 
-			override def empty[A]: Set[A] = Set.empty
+			override def empty[A]: Set[A] = ???
 
-			override def combine[A](x: Set[A], y: Set[A]): Set[A] = x union y
+			override def combine[A](x: Set[A], y: Set[A]): Set[A] = ???
 		}
 
 	}
@@ -34,7 +36,8 @@ class FP_6_4_SemiGroupK extends FunSpec with ShouldMatchers {
 
 			val right = Set(2, 4, 6)
 
-			left <+> right shouldBe Set(2)
+			// SEEME 4_SemigroupK_3
+			(??? : Set[Int]) shouldBe Set(2)
 
 		}
 	}
@@ -52,7 +55,8 @@ class FP_6_4_SemiGroupK extends FunSpec with ShouldMatchers {
 
 			val right = Set(2, 4, 6)
 
-			left <+> right shouldBe Set(1, 2, 3, 4, 6)
+			// SEEME 4_SemigroupK_4
+			(??? : Set[Int]) shouldBe Set(1, 2, 3, 4, 6)
 
 		}
 
@@ -63,9 +67,11 @@ class FP_6_4_SemiGroupK extends FunSpec with ShouldMatchers {
 
 			val list = List(left, right)
 
-			Foldable[List].foldK(list) shouldBe Set(1, 2, 3, 4, 6)
-			
-			Foldable[List].fold(list)(implicitly[MonoidK[Set]].algebra) shouldBe Set(1, 2, 3, 4, 6)
+			// SEEME 4_SemigroupK_5
+			(??? : Set[Int]) shouldBe Set(1, 2, 3, 4, 6)
+
+			// SEEME 4_SemigroupK_6
+			(??? : Set[Int]) shouldBe Set(1, 2, 3, 4, 6)
 
 		}
 	}
