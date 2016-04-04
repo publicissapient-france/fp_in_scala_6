@@ -1,6 +1,6 @@
 # Set category
 
-Functional programing aims at build large scale programs based on small composed functions. 
+Functional programing aims at building large scale programs based on composing small functions. 
 Those smaller functions are the atomic capabilities of the programs. Once composed with each other, they form a bigger capability, yet testable and still composable.
 
 We've already seen [functions compositions](https://github.com/xebia-france/fp_in_scala_4) in previous a session.
